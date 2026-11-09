@@ -1,4 +1,9 @@
-# FIAP Store — Global Solution (Cloud Developer II)
+# FIAP Store — Global Solution (Cloud Native)
+
+**Professor:** Fabio Bara · **Turma:** 2TCNPZ
+
+▶️ **Vídeo da demonstração:** https://youtu.be/p-7EineDkBE —
+comandos, saídas e explicação de cada item em [`DEMONSTRACAO.md`](DEMONSTRACAO.md).
 
 Plataforma Kubernetes sobre Amazon EKS que executa a FIAP Store, construída pelo grupo
 como parte da Global Solution. Este README documenta **como criar e destruir** todo o
