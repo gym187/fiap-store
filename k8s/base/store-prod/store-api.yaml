@@ -51,12 +51,17 @@ spec:
           labelSelector:
             matchLabels:
               app: store-api
+          # conta so os Pods da mesma versao (ReplicaSet): sem isso o rollout espalha mal
+          matchLabelKeys:
+            - pod-template-hash
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
           whenUnsatisfiable: ScheduleAnyway
           labelSelector:
             matchLabels:
               app: store-api
+          matchLabelKeys:
+            - pod-template-hash
       containers:
         - name: store-api
           image: store-api:1.0
