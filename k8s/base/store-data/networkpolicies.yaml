@@ -27,6 +27,24 @@ spec:
           podSelector:
             matchLabels:
               app: store-api
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: store-prod
+          podSelector:
+            matchLabels:
+              app: store-worker
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: store-prod
+          podSelector:
+            matchLabels:
+              app: db-migrate
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: store-prod
+          podSelector:
+            matchLabels:
+              app: store-report
       ports:
         - protocol: TCP
           port: 5432
