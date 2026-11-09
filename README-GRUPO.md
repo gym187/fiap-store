@@ -43,7 +43,8 @@ Internet (HTTPS)
 ## Pré-requisitos locais
 
 - `aws`, `eksctl`, `kubectl`, `helm`, `docker` com `buildx`, `git`
-- Conta AWS Academy Learner Lab ativa (`~/.aws/credentials` atualizado a cada sessão)
+- Conta AWS Academy Learner Lab ativa (`~/.aws/credentials` atualizado a cada sessão; se usar um perfil
+  nomeado, exporte `AWS_PROFILE` antes dos comandos)
 
 ## Criação do ambiente (do zero)
 
@@ -143,17 +144,19 @@ kubectl edit configmap aws-auth -n kube-system
     - fiap:devs
 ```
 
-### 6. Ajustar o overlay e sincronizar via Argo CD
+### 6. Sincronizar via Argo CD
+
+O overlay `k8s/overlays/eks` já aponta para o ECR da conta do lab (`701096295882`, `us-east-1`)
+e a Application aponta para este repositório. Em outra conta, troque o número em
+`k8s/overlays/eks/kustomization.yaml`.
 
 ```bash
-sed -i.bak "s/ACCOUNT_ID/$ACCOUNT_ID/g; s/AWS_REGION/$AWS_REGION/g" \
-  k8s/overlays/eks/kustomization.yaml
-
-# ajuste repoURL e targetRevision em k8s/argocd/application.yaml
 kubectl apply -f k8s/argocd/application.yaml
-
-kubectl -n argocd get applications -w
+kubectl -n argocd get applications -w     # esperar Synced / Healthy
 ```
+
+- Repositório sincronizado: https://github.com/gym187/fiap-store (path `k8s/overlays/eks`, branch `main`)
+- Application: `fiap-store` no namespace `argocd` (`prune` e `selfHeal` ligados)
 
 Argo CD URL:
 
