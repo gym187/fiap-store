@@ -62,6 +62,11 @@ spec:
           volumeMounts:
             - name: tmp
               mountPath: /tmp
+          # segura o encerramento ate o Traefik tirar o Pod dos endpoints (evita 502 em rollout/drain)
+          lifecycle:
+            preStop:
+              sleep:
+                seconds: 10
           readinessProbe:
             httpGet:
               path: /healthz

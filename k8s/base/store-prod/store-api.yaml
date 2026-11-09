@@ -84,6 +84,11 @@ spec:
             - name: db-secret
               mountPath: /etc/secrets/db
               readOnly: true
+          # segura o encerramento ate o Traefik tirar o Pod dos endpoints (evita 502 em rollout/drain)
+          lifecycle:
+            preStop:
+              sleep:
+                seconds: 10
           readinessProbe:
             httpGet:
               path: /ready
