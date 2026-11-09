@@ -119,7 +119,7 @@ while [ -z "$HOST" ]; do
 done
 
 openssl req -x509 -newkey rsa:2048 -nodes -days 365 \
-  -subj "/CN=$HOST" -addext "subjectAltName=DNS:$HOST" \
+  -subj "/CN=fiap-store" -addext "subjectAltName=DNS:$HOST" \
   -keyout /tmp/tls.key -out /tmp/tls.crt
 kubectl -n store-prod create secret tls store-tls \
   --cert=/tmp/tls.crt --key=/tmp/tls.key
