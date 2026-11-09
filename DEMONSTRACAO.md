@@ -364,6 +364,10 @@ G. Serverless e GitOps (cap. 8 e 11)
 ===================================================================================
 ```
 
+**Prova de conclusão** (print da execução do script no terminal):
+
+![verifica-gs.sh com 80/80](avaliacao/evidencias/verifica-gs-80-80.png)
+
 **Resolução:** o script oficial, que só faz leituras no cluster, confirmou **80 de 80** pontos
 automáticos. Os itens manuais estão no repositório: M1 no [`README.md`](README.md) (criar e
 destruir o ambiente), M2 nos Secrets criados via `kubectl` e nunca versionados, e M3 em

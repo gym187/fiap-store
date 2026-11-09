@@ -5,6 +5,9 @@
 ▶️ **Vídeo da demonstração:** https://youtu.be/p-7EineDkBE —
 comandos, saídas e explicação de cada item em [`DEMONSTRACAO.md`](DEMONSTRACAO.md).
 
+✅ **Script de validação (`avaliacao/verifica-gs.sh`): 80 / 80** —
+[print da execução](avaliacao/evidencias/verifica-gs-80-80.png).
+
 Plataforma Kubernetes sobre Amazon EKS que executa a FIAP Store, construída pelo grupo
 como parte da Global Solution. Este README documenta **como criar e destruir** todo o
 ambiente (item M1 da avaliação) e onde está cada peça da nota.
