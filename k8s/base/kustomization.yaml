@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - namespaces.yaml
+  - storage-class.yaml
+  - store-data/store-db.yaml
+  - store-data/store-redis.yaml
+  - store-data/networkpolicies.yaml
+  - store-prod/configmap.yaml
+  - store-prod/quota-limitrange.yaml
+  - store-prod/serviceaccounts.yaml
+  - store-prod/rbac.yaml
+  - store-prod/store-api.yaml
+  - store-prod/store-worker.yaml
+  - store-prod/store-front.yaml
+  - store-prod/hpa-pdb.yaml
+  - store-prod/ingress.yaml
+  - store-prod/db-migrate.yaml
+  - store-prod/store-report.yaml
+  - store-prod/keda-scaledobject.yaml
+  - store-prod/networkpolicies.yaml
+  - platform-monitoring/namespace.yaml
+  - platform-monitoring/daemonset.yaml

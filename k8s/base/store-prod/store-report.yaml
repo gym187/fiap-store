@@ -1,0 +1,65 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: store-report
+  namespace: store-prod
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  startingDeadlineSeconds: 120
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      ttlSecondsAfterFinished: 3600
+      template:
+        metadata:
+          labels:
+            app: store-report
+        spec:
+          restartPolicy: OnFailure
+          serviceAccountName: store-worker
+          automountServiceAccountToken: false
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            runAsGroup: 10001
+            fsGroup: 10001
+            seccompProfile:
+              type: RuntimeDefault
+          containers:
+            - name: report
+              image: store-worker:1.0
+              imagePullPolicy: IfNotPresent
+              command: ["python", "-m", "worker.relatorio"]
+              envFrom:
+                - configMapRef:
+                    name: store-api-config
+              volumeMounts:
+                - name: db-secret
+                  mountPath: /etc/secrets/db
+                  readOnly: true
+              resources:
+                requests:
+                  cpu: 50m
+                  memory: 128Mi
+                limits:
+                  cpu: 300m
+                  memory: 256Mi
+              securityContext:
+                runAsNonRoot: true
+                runAsUser: 10001
+                readOnlyRootFilesystem: true
+                allowPrivilegeEscalation: false
+                seccompProfile:
+                  type: RuntimeDefault
+                capabilities:
+                  drop: ["ALL"]
+          volumes:
+            - name: db-secret
+              secret:
+                secretName: store-db-credentials
+                items:
+                  - key: password
+                    path: password

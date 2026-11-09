@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
+
+images:
+  - name: store-api
+    newName: 701096295882.dkr.ecr.us-east-1.amazonaws.com/store-api
+    newTag: "1.0"
+  - name: store-worker
+    newName: 701096295882.dkr.ecr.us-east-1.amazonaws.com/store-worker
+    newTag: "1.0"
+  - name: store-front
+    newName: 701096295882.dkr.ecr.us-east-1.amazonaws.com/store-front
+    newTag: "1.0"
